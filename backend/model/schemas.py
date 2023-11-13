@@ -1,3 +1,4 @@
+from fastapi import Form
 from pydantic import BaseModel
 
 
@@ -11,7 +12,7 @@ class TokenData(BaseModel):
 
 class UserInput(BaseModel):
     id: int
-    username: str or None = None
-    email: str or None = None
-    password: str or None = None
+    username: str or None = Form(None)
+    email: str or None = Form(None)
+    password: str or None = Form(None)
     
