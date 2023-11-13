@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
+.App-header{
+  background-color: #2C4A52;
+}
+.App{
+  background-color: #F4EBDB;
+}
+#registr{
+  right: 0;
+}
+.content{
+  display: block;
+  background-color: #F4EBDB;
+}
+#FontIcon{
+  font-size: 30px;
+  font-family: 'Dela Gothic One';
+}
+#buttonReg{
+  border: 3px solid #F4EBDB;
+  border-radius: 20px;
+  right: 1px !important;
+  background-color: #2C4A52;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a{
+  font-family: 'Dela Gothic One';
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.globalcont{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 3px solid #2C4A52;
+  border-radius: 20px;
+  margin: 15px;
+  background: linear-gradient(#2C4A52) no-repeat center/2px 100%;
+  width: 980px;
+}
+.containerLeft{
+  border-right: 3px solid #2C4A52 ;
+  width: 50%;
+  padding: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.containerRight {
+  width: 50%;
+  padding: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Content{
+  display: flex;
+  justify-content: space-around;
 }
