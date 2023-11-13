@@ -1,7 +1,9 @@
 .App-header{
   background-color: #2C4A52;
 }
-
+.App{
+  background-color: #F4EBDB;
+}
 #registr{
   right: 0;
 }
@@ -22,4 +24,30 @@
 
 a{
   font-family: 'Dela Gothic One';
+}
+.globalcont{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 3px solid #2C4A52;
+  border-radius: 20px;
+  margin: 15px;
+  background: linear-gradient(#2C4A52) no-repeat center/2px 100%;
+  width: 980px;
+}
+.containerLeft{
+  border-right: 3px solid #2C4A52 ;
+  width: 50%;
+  padding: 15px;
+}
+
+.containerRight {
+  width: 50%;
+  padding: 25px;
+}
+
+.Content{
+  display: flex;
+  justify-content: space-around;
 }
