@@ -37,7 +37,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
@@ -89,30 +89,33 @@ async def read_users():
 @app.post('/register')
 async def create_user(user: UserInput):
     db = DBSession()
-    try:
-        # if len(user.username) == 0 or len(user.password) == 0 or len(user.email) == 0:
-        #     raise HTTPException(status_code=400, 
-        #                         detail={
-        #                             "status": "Error 400",
-        #                             'msg': 'username or password or email are empty'
-        #                         })
-        new_user = models.User(
-            # username=user.username,
-            first_name=user.first_name,
-            second_name=user.second_name,
-            third_name=user.third_name,
-            email=user.email,
-            phone=user.phone
-            # password=get_password_hash(user.password)
-        )
-        db.add(new_user)
-        db.commit()
-        db.refresh(new_user)
+    # try:
+    if len(user.username) == 0 or len(user.password) == 0 or len(user.email) == 0:
+        raise HTTPException(status_code=400, 
+                detail={
+                    "status": "Error 400",
+                    'msg': 'Some field is empty'
+                })
         
-        await send_mail(new_user)
-    finally:
-        db.close()
-    return {"message": "User added successfull"}
+        
+    new_user = models.User(
+            # username=user.username,
+        first_name=user.first_name,
+        second_name=user.second_name,
+        third_name=user.third_name,
+        email=user.email,
+        phone=user.phone,
+        password=get_password_hash(user.password)
+    )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+        
+    await send_mail(new_user)
+    # finally:
+    db.close()
+        
+    return JSONResponse(status_code=200, content={'message': 'User create successfully'})
 
 # @app.post('/login', response_model=Token)
 # async def login_for_access_token(

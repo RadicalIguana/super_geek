@@ -21,12 +21,11 @@ class User(Base):
     third_name = Column(String(300))
     email = Column(String(300), unique=True)
     phone = Column(String(300), unique=True)
-    # password = Column(String(300))
+    password = Column(String(300))
 
-    # @classmethod
-    # def get_by_username(cls, username: str):
-    #     session = SessionLocal()
-    #     instance = session.query(cls).filter_by(username=username).first()
-    #     session.close()
-    #     return instance
-        
+    @classmethod
+    def get_by_email(cls, email: str):
+        session = SessionLocal()
+        instance = session.query(cls).filter_by(email=email).first()
+        session.close()
+        return instance
