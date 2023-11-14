@@ -60,7 +60,11 @@ h1{
   flex-direction: row;
   justify-content: center;
 }
-
-#itfor{
-  font-family: playfair display SC;
+.img1{
+  position: absolute;
+  z-index: 1;
+}
+.img2{
+  position: absolute;
+z-index: 2;
 }
