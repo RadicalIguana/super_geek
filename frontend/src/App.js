@@ -129,7 +129,11 @@ function App() {
                     <input type="email" className="form-control" id="exampleFormControlInput3" placeholder="@Email" />
                   </div><div className="mb-4 mt-1">
                     <input type="number" className="form-control" id="exampleFormControlInput4" placeholder="Номер телефона" />
-                  </div><div className="d-grid gap-2">
+                  </div>
+                  <div className="mb-4 mt-1">
+                    <input type="text" className="form-control" id="exampleFormControlInput4" placeholder="Пароль" />
+                  </div>
+                  <div className="d-grid gap-2">
                     <button type='button' onClick={() => setIsRegistered(true)} class="btn btn" style={{ backgroundColor: '#2C4A52', color: '#F4EBDB' }}>Отправить</button>
                   </div></>
           )}
