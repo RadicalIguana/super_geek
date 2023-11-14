@@ -12,7 +12,9 @@ class TokenData(BaseModel):
 
 class UserInput(BaseModel):
     id: int
-    username: str or None = Form(None)
-    email: str or None = Form(None)
-    password: str or None = Form(None)
-    
+    first_name: str or None = None
+    second_name: str or None = None
+    third_name: str or None = None
+    email: str or None = None
+    phone: str or None = None
+    # password: str or None = None

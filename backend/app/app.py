@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 import sys
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI, HTTPException, Depends, status, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from jinja2 import Environment, PackageLoader, select_autoescape
 from app.auth import authenticate_user, create_access_token, get_password_hash
 
@@ -25,7 +25,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 800
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/login')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
 app = FastAPI()
 
@@ -43,9 +43,39 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get('/')
-async def read_root():
-    return {"message": "Hello, nigets"}
+# Chat test
+html = ""
+with open('index.html', 'r') as f:
+    html = f.read()
+
+@app.get("/")
+async def get():
+    return HTMLResponse(html)
+
+class ConnectionManager:
+    def __init__(self):
+        self.connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.connections.append(websocket)
+
+    async def broadcast(self, data: str):
+        for connection in self.connections:
+            await connection.send_text(data)
+
+
+manager = ConnectionManager()
+
+
+@app.websocket("/ws/{client_id}")
+async def websocket_endpoint(websocket: WebSocket, client_id: int):
+    await manager.connect(websocket)
+    while True:
+        data = await websocket.receive_text()
+        await manager.broadcast(f"Client {client_id}: {data}")
+
+# Chat end
 
 @app.get('/users')
 async def read_users():
@@ -60,39 +90,45 @@ async def read_users():
 async def create_user(user: UserInput):
     db = DBSession()
     try:
-        if len(user.username) == 0 or len(user.password) == 0 or len(user.email) == 0:
-            raise HTTPException(status_code=400, 
-                                detail={
-                                    "status": "Error 400",
-                                    'msg': 'username or password or email are empty'
-                                })
+        # if len(user.username) == 0 or len(user.password) == 0 or len(user.email) == 0:
+        #     raise HTTPException(status_code=400, 
+        #                         detail={
+        #                             "status": "Error 400",
+        #                             'msg': 'username or password or email are empty'
+        #                         })
         new_user = models.User(
-            username=user.username,
+            # username=user.username,
+            first_name=user.first_name,
+            second_name=user.second_name,
+            third_name=user.third_name,
             email=user.email,
-            password=get_password_hash(user.password)
+            phone=user.phone
+            # password=get_password_hash(user.password)
         )
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
+        
+        await send_mail(new_user)
     finally:
         db.close()
     return {"message": "User added successfull"}
 
-@app.post('/login', response_model=Token)
-async def login_for_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-):
-    user = authenticate_user(form_data.username, form_data.password)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail='Incorrect username or password',
-            headers={'WWW-Authenticate': 'Bearer'},
-        )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={'sub': user.username}, expires_delta=access_token_expires)
-    return {'access_token': access_token, 'token_type': 'bearer'}
+# @app.post('/login', response_model=Token)
+# async def login_for_access_token(
+#     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+# ):
+#     user = authenticate_user(form_data.username, form_data.password)
+#     if not user:
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail='Incorrect username or password',
+#             headers={'WWW-Authenticate': 'Bearer'},
+#         )
+#     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+#     access_token = create_access_token(
+#         data={'sub': user.username}, expires_delta=access_token_expires)
+#     return {'access_token': access_token, 'token_type': 'bearer'}
 
 
 # Email
@@ -119,22 +155,29 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )   
 
-@app.post("/send_mail")
-async def send_mail(email: EmailSchema):
 
-    template = env.get_template('email.html')
+async def send_mail(user):
+
+    template_user = env.get_template('email_user.html', globals={'user': user})
+    html_user = template_user.render()
     
-    html = template.render()
+    template_owner = env.get_template('email_owner.html', globals={'user': user})
+    html_owner = template_owner.render()
 
-    message = MessageSchema(
+    message_to_user = MessageSchema(
 		subject="Регистрация прошла успешно",
-		recipients=email.email, 
-		body=html,
+		recipients=[user.email], 
+		body=html_user,
+		subtype="html"
+		)
+    
+    message_to_owner = MessageSchema(
+		subject="Пользователь зарегестрировался",
+		recipients=[user.email], 
+		body=html_owner,
 		subtype="html"
 		)
 
     fm = FastMail(conf)
-    await fm.send_message(message, template_name='email.html')
-    print(message)
-
-    return JSONResponse(status_code=200, content={"message": "email has been sent"})
+    await fm.send_message(message_to_user)
+    await fm.send_message(message_to_owner)
