@@ -11,6 +11,7 @@ function App() {
   const formRef = useRef(null);
   const [registrationStatus, setRegistrationStatus] = useState(0); // 0 - регистрация, 1 - успешно, 2 - не успешно
   const [showScroll, setShowScroll] = useState(false);
+  const [registrationError, setRegistrationError] = useState("");
 
   const [firstName, setFirstName] = useState("")
   const [secondName, setSecondName] = useState("")
@@ -20,8 +21,6 @@ function App() {
   const [password, setPassword] = useState("")
 
   const handleSubmit = () => {
-
-
     const payload = {
       'first_name': firstName,
       'second_name': secondName,
@@ -30,18 +29,22 @@ function App() {
       'phone': phone,
       'password': password
     }
-
+  
     axios.post('http://localhost:8000/register', payload)
-    .then(res => {
-      if (res.status === 200) {
-        setRegistrationStatus(1)
-      } else {
-        setRegistrationStatus(2)
-      }
-
-      console.log(registrationStatus)
-    })
+      .then(res => {
+        if (res.status === 200) {
+          setRegistrationStatus(1);
+        } else {
+          setRegistrationStatus(2);
+          setRegistrationError("Регистрация не удалась. Пожалуйста, проверьте введенные данные и попробуйте еще раз.");
+        }
+      })
+      .catch(error => {
+        setRegistrationStatus(2);
+        setRegistrationError("Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз.");
+      });
   }
+  
 
   const checkScrollTop = () => {
     if (!showScroll && window.pageYOffset > 400) {
@@ -131,22 +134,8 @@ function App() {
         </div>
       <div ref={formRef} className='globalcont'>
       <div className='containerLeft'>
-        
-        {/* { 
-          registrationStatus === 0 ?
-          (
-            <p>Погрузитесь в мир IT!</p>
-          )
-          : registrationStatus === 1 ?
-          (
-            <p>ждем тебя на Super Geek!</p>
-          )
-          :
-          (
-            <p>Что-то пошло не так {'>'}:{'('}</p>
-          )
-        } */}
-        <img src='wait_you.png' style={{width: '470px', height:'414px', display:'flex'}} class = 'img1'></img>
+        <img src='wait_you.png' style={{width: '470px', height:'314px', display:'flex'}} class = 'img1'></img>
+        <img src='group.png' style={{width:'175px', height:'256px'}} class='img2'></img>
       </div>
       <div className="containerRight">
       {/* { registrationStatus === 0 ? 
@@ -168,27 +157,41 @@ function App() {
           </div>
         )
       } */}
-      { 
-      registrationStatus === 1 ? (
-            <><img src="http://www.w3.org/2000/svg" alt="Спасибо за регистрацию" /><i className="bi bi-check-circle"></i><div></div></>
+      {registrationStatus === 1 ? (
+            <>
+              <img src="http://www.w3.org/2000/svg" alt="Спасибо за регистрацию" />
+              <i className="bi bi-check-circle"></i>
+              <div></div>
+            </>
           ) : (
-            <><div className="mb-1 mt-3">
-                  <input htmlFor="validationCustom01" type="text" className="form-control" id="alidationCustom01" placeholder="Фамилия" onChange={(e) => setFirstName(e.target.value)} required />
-                </div><div className="mb-1 mt-3">
-                    <input htmlFor="validationCustom01" type="text" className="form-control" id="alidationCustom01" placeholder="Имя" onChange={(e) => setSecondName(e.target.value)} required />
-                  </div><div className="mb-2 mt-3">
-                    <input type="text" className="form-control" id="exampleFormControlInput2" placeholder="Отчество" onChange={(e) => setThirdName(e.target.value)}/>
-                  </div><div className="mb-3 mt-3">
-                    <input type="email" className="form-control" id="exampleFormControlInput3" placeholder="@Email" onChange={(e) => setEmail(e.target.value)}/>
-                  </div><div className="mb-4 mt-1">
-                    <input type="number" className="form-control" id="exampleFormControlInput4" placeholder="Номер телефона" onChange={(e) => setPhone(e.target.value)}/>
-                  </div>
-                  <div className="mb-4 mt-1">
-                    <input type="password" className="form-control" id="exampleFormControlInput4" placeholder="Пароль" onChange={(e) => setPassword(e.target.value)}/>
-                  </div>
-                  <div className="d-grid gap-2">
-                    <button type='button' onClick={handleSubmit} className="btn btn" style={{ backgroundColor: '#2C4A52', color: '#F4EBDB' }}>Отправить</button>
-                  </div></>
+            <>
+              {registrationStatus === 2 && (
+                <div className="alert alert-danger" role="alert">
+                  {registrationError}
+                </div>
+              )}
+              <div className="mb-1 mt-3">
+                <input type="text" className="form-control" placeholder="Фамилия" onChange={(e) => setFirstName(e.target.value)} required />
+              </div>
+              <div className="mb-1 mt-3">
+                <input type="text" className="form-control" placeholder="Имя" onChange={(e) => setSecondName(e.target.value)} required />
+              </div>
+              <div className="mb-2 mt-3">
+                <input type="text" className="form-control" placeholder="Отчество" onChange={(e) => setThirdName(e.target.value)} />
+              </div>
+              <div className="mb-3 mt-3">
+                <input type="email" className="form-control" placeholder="@Email" onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div className="mb-4 mt-1">
+                <input type="number" className="form-control" placeholder="Номер телефона" onChange={(e) => setPhone(e.target.value)} />
+              </div>
+              <div className="mb-4 mt-1">
+                <input type="password" className="form-control" placeholder="Пароль" onChange={(e) => setPassword(e.target.value)} />
+              </div>
+              <div className="d-grid gap-2">
+                <button type='button' onClick={handleSubmit} className="btn btn" style={{ backgroundColor: '#2C4A52', color: '#F4EBDB' }}>Отправить</button>
+              </div>
+            </>
           )}
           </div>
     </div>
