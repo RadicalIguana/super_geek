@@ -86,37 +86,43 @@ function App() {
   };
 
   return (
+    <div>
     <div className="App" style={{ fontFamily: "'Dela Gothic One', cursive" }}>
       <header className="App-header">
-      <nav className="navbar navbar-expand ">
-      <div className="container-fluid" style={{color: '#2C4a52', display: 'block', alignItems:'center'}}>
-      <div className="navbar-nav " style={{display: "flex", justifyContent: 'space-between', width: 'max'}}>
-        <div style={{display: 'flex', justifyContent: 'space-between', width: '400px', fontSize:'20px'}}>
-            <a className="nav-link active" aria-current="page" href="#" style={{ color: '#F4EBDB' }}>О форуме</a>
-            <a className="nav-link active" href="#" style={{ color: '#F4EBDB' }}>Описание</a>
-            <a className="nav-link active" href="#" style={{ color: '#F4EBDB' }}>Программа</a>
-          </div>
-          
-          <a className="navbar-brand" href="#" style={{ color: '#F4EBDB', display: "flex", flexDirection: "column", alignItems: 'center' }}>
-            <span id="FontIcon" style={{ display: "block", textAlign: "center" }}>Super Geek</span>
-            <span style={{ display: "block", textAlign: "center" }}>IT-форум</span>
-          </a>
+        <nav className="navbar navbar-expand ">
+          <div className="container-fluid" style={{color: '#2C4a52', display: 'block', alignItems:'center'}}>
+            <div className="navbar-nav " style={{display: "flex", justifyContent: 'space-between', width: 'max'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between', width: '400px', fontSize:'20px'}}>
+                <a className="nav-link active" aria-current="page" href="#" style={{ color: '#F4EBDB' }}>О форуме</a>
+                <a className="nav-link active" href="#" style={{ color: '#F4EBDB' }}>Описание</a>
+                <a className="nav-link active" href="#" style={{ color: '#F4EBDB' }}>Программа</a>
+              </div>
+                  
+              <a className="navbar-brand" href="#" style={{ color: '#F4EBDB', display: "flex", flexDirection: "column", alignItems: 'center' }}>
+                <span id="FontIcon" style={{ display: "block", textAlign: "center" }}>Super Geek</span>
+                <span style={{ display: "block", textAlign: "center" }}>IT-форум</span>
+              </a>
 
-        <div style={{width: '400px', display: 'flex', justifyContent: "flex-end"}}>
-          <button onClick={scrollToRegistration} id="buttonReg" style={{ color: '#F4EBDB', padding:'15px'}}>Регистрация</button>
-        </div>
-      </div>
-    
-  </div>
-</nav>
+              <div style={{width: '400px', display: 'flex', justifyContent: "flex-end"}}>
+                <button onClick={scrollToRegistration} id="buttonReg" style={{ color: '#F4EBDB', padding:'15px'}}>Регистрация</button>
+              </div>
+            </div>
+          </div>
+        </nav>
       </header>
+    </div>
       <div className="Content" style={{ backgroundColor: '#F4EBDB' }}>
         <div>
         <div className='2023'>
+        <div class='2023' style={{width:'200px'}}>
             <h1 style={{height:'200px',weight:'200px'}}>2023</h1>
+            <h1>15-16 НОЯБРЯ</h1>
+            <h1 style={{border:'3px solid #2C4A52'}}>ИТ Колледж Курган</h1>
           </div>
           <div className="Chel">
               <img src='chel.jpg'></img>
+          <div class="Chel">
+              <img src='logo_new 1.png' style={{height:'224px', width:'229px'}}></img>
               <div style={{height:''}}>
                 <span id="FontIcon" style={{ display: "block" }}>Форум</span>
                 <span style={{ display: "block" }}>IT-технологий</span>
@@ -125,7 +131,8 @@ function App() {
         </div>
       <div ref={formRef} className='globalcont'>
       <div className='containerLeft'>
-        { 
+        sad
+        {/* { 
           registrationStatus === 0 ?
           (
             <p>Погрузитесь в мир IT!</p>
@@ -138,7 +145,9 @@ function App() {
           (
             <p>Что-то пошло не так {'>'}:{'('}</p>
           )
-        }
+        } */}
+        <img src='wait_you.png' style={{width: '470px', height:'314px', display:'flex'}} class = 'img1'></img>
+        <img src='group.png' style={{width:'175px', height:'256px'}} class='img2'></img>
       </div>
       <div className="containerRight">
       {/* { registrationStatus === 0 ? 
@@ -163,7 +172,7 @@ function App() {
       { 
       registrationStatus === 0 ? (
             <><img src="http://www.w3.org/2000/svg" alt="Спасибо за регистрацию" /><i className="bi bi-check-circle"></i><div></div></>
-          ) : registrationStatus === 1 ? (
+          ) : (
             <><div className="mb-1 mt-3">
                   <input htmlFor="validationCustom01" type="text" className="form-control" id="alidationCustom01" placeholder="Фамилия" onChange={(e) => setFirstName(e.target.value)} required />
                 </div><div className="mb-1 mt-3">
@@ -182,6 +191,7 @@ function App() {
                     <button type='button' onClick={handleSubmit} className="btn btn" style={{ backgroundColor: '#2C4A52', color: '#F4EBDB' }}>Отправить</button>
                   </div></>
           )}
+          </div>
     </div>
     </div>
       </div>
@@ -213,7 +223,7 @@ function App() {
         </div>
     </footer>
     </div>
+    </div>
   );
 }
-
 export default App;
