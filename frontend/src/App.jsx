@@ -8,13 +8,25 @@ function App() {
   const [password, setPassword] = useState("")
 
   const handleSubmit = () => {
-    axios.post('http://localhost:8000/login', {
-      'username': username,
-      'password': password
-    })
+
+    let formData = new FormData()
+    formData.append('username', username)
+    formData.append('password', password)
+
+    axios.post('http://localhost:8000/login', 
+      formData,
+      {
+        headers: {
+          "Content-type": "multipart/form-data"
+        }
+      }
+    )
     .then(res => {
-      console.log(res.data)
+      console.log("Success" + res)
     })
+    .catch(err => {
+      console.log("Error" + err);
+  })
   }
 
   return (
