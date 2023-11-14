@@ -96,8 +96,10 @@ function App() {
       </header>
       <div class="Content" style={{ backgroundColor: '#F4EBDB' }}>
         <div>
-        <div class='2023'>
+        <div class='2023' style={{width:'200px'}}>
             <h1 style={{height:'200px',weight:'200px'}}>2023</h1>
+            <h1>15-16 НОЯБРЯ</h1>
+            <h1 style={{border:'3px solid #2C4A52'}}>ИТ Колледж Курган</h1>
           </div>
           <div class="Chel">
               <img src='logo_new 1.png' style={{height:'224px', width:'229px'}}></img>
