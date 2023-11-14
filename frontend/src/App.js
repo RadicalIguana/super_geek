@@ -220,10 +220,10 @@ function App() {
           </div>
         )}
       <footer style={{ backgroundColor: '#2C4A52', color: '#F4EBDB',  bottom: '0', width: '100%', height:'101px' }}>
-        <div style={{ textAlign: 'right' }}>
-          <a href="ссылка1" style={{}} ><i className="bi bi-telegram"></i></a>
-          <a href="ссылка2" ><i className="bi bi-instagram"></i></a>
-          <a href="ссылка3" ><i className="bi bi-whatsapp"></i></a>
+        <div style={{ textAlign: 'right', marginLeft:'10px'}}>
+          <a href="ссылка1" style={{}} ><i className="bi bi-telegram" style={{fontSize:'50px'}}></i></a>
+          <a href="ссылка2" ><i className="bi bi-instagram"style={{fontSize:'50px'}}></i></a>
+          <a href="ссылка3" ><i className="bi bi-whatsapp"style={{fontSize:'50px'}}></i></a>
         </div>
     </footer>
     </div>
