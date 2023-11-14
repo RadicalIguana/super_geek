@@ -100,7 +100,7 @@ function App() {
             <h1 style={{height:'200px',weight:'200px'}}>2023</h1>
           </div>
           <div class="Chel">
-              <img src='chel.jpg'></img>
+              <img src='logo_new 1.png' style={{height:'224px', width:'229px'}}></img>
               <div style={{height:''}}>
                 <span id="FontIcon" style={{ display: "block" }}>Форум</span>
                 <span style={{ display: "block" }}>IT-технологий</span>
@@ -108,7 +108,11 @@ function App() {
           </div>
         </div>
       <div ref={formRef} className='globalcont'>
-      <div className='containerLeft'>sad</div>
+      <div className='containerLeft'>
+        <img src=''>
+
+        </img>
+      </div>
       <div className="containerRight">
       {isRegistered ? (
       <div className="row">
