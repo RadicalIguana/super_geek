@@ -97,7 +97,10 @@ function App() {
       <div class="Content" style={{ backgroundColor: '#F4EBDB' }}>
         <div>
         <div class='2023'>
-            <h1 style={{height:'200px',weight:'200px'}}>2023</h1>
+            <h1 style={{height:'200px',weight:'200px'}}>2023
+
+            <h1 style={{marginRight:'150px'}}>15-16 НОЯБРЯ</h1></h1>
+            
           </div>
           <div class="Chel">
               <img src='logo_new 1.png' style={{height:'224px', width:'229px'}}></img>
@@ -109,7 +112,7 @@ function App() {
         </div>
       <div ref={formRef} className='globalcont'>
       <div className='containerLeft'>
-        <img src='wait_you.png' style={{width: '470px', height:'314px', display:'flex'}} class = 'img1'></img>
+        <img src='wait_you.png' style={{width: '470px', height:'414px', display:'flex'}} class = 'img1'></img>
         <img src='group.png' style={{width:'175px', height:'256px'}} class='img2'></img>
       </div>
       <div className="containerRight">
