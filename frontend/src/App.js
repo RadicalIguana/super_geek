@@ -109,9 +109,8 @@ function App() {
         </div>
       <div ref={formRef} className='globalcont'>
       <div className='containerLeft'>
-        <img src=''>
-
-        </img>
+        <img src='wait_you.png' style={{width: '470px', height:'314px', display:'flex'}} class = 'img1'></img>
+        <img src='group.png' style={{width:'175px', height:'256px'}} class='img2'></img>
       </div>
       <div className="containerRight">
       {isRegistered ? (
