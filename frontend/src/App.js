@@ -129,9 +129,9 @@ function App() {
               </div>
           </div>
         </div>
-      <div ref={formRef} className='globalcont'>
+      <div ref={formRef} className='globalcont' style={{height:'460px'}}>
       <div className='containerLeft'>
-        <img src='wait_you.png' style={{width: '470px', height:'314px', display:'flex'}} class = 'img1'></img>
+        <img src='wait_you.png' style={{width: '470px', height:'414px', display:'flex'}} class = 'img1'></img>
         <img src='group.png' style={{width:'175px', height:'256px'}} class='img2'></img>
       </div>
       <div className="containerRight">
@@ -156,7 +156,7 @@ function App() {
       } */}
       { 
       registrationStatus === 0 ? (
-            <><img src="http://www.w3.org/2000/svg" alt="Спасибо за регистрацию" /><i className="bi bi-check-circle"></i><div></div></>
+            <><img src="vector.png" style={{width: '300px', height:'300px'}} alt="Спасибо за регистрацию" /><div>Спасибо за регистрацию!<i className="bi bi-check-circle"></i></div></>
           ) : (
             <><div className="mb-1 mt-3">
                   <input htmlFor="validationCustom01" type="text" className="form-control" id="alidationCustom01" placeholder="Фамилия" onChange={(e) => setFirstName(e.target.value)} required />
