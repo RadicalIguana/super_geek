@@ -114,25 +114,65 @@ function App() {
       <div className="Content" style={{ backgroundColor: '#F4EBDB' }}>
         <div>
         <div className='2023'>
-        <div class='2023' style={{width:'200px'}}>
-            <h1 style={{height:'200px',weight:'200px'}}>2023</h1>
-            <h1>15-16 НОЯБРЯ</h1>
-            <h1 style={{border:'3px solid #2C4A52'}}>ИТ Колледж Курган</h1>
-          </div>
-          <div className="Chel">
-              <img src='chel.jpg'></img>
-          <div class="Chel">
-              <img src='logo_new 1.png' style={{height:'224px', width:'229px'}}></img>
-              <div style={{height:''}}>
-                <span id="FontIcon" style={{ display: "block" }}>Форум</span>
-                <span style={{ display: "block" }}>IT-технологий</span>
+          <div className='TopContainer' style={{display: 'flex', flexDirection: 'row-reverse'}}>
+            <div class='2023' style={{width: '50%'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between', margin: '15px', marginRight: '20px'}}>
+                <h1 style={{fontFamily: "Dela Gothic One", height: 'fit-content'}}>2023</h1>
+                <h1 style={{fontFamily: "Dela Gothic One", height: 'fit-content'}}>15-16 НОЯБРЯ</h1>
               </div>
+
+              <div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignContent: 'center', margin: '20px', marginLeft: '0px'}}>
+                <div style={{border: '3px solid #2C4A52', borderRadius: '40px', height: '70px', display: 'flex', flexDirection: 'column', paddingLeft: '10px', paddingRight: '10px'}}>
+                  <h1 style={{fontFamily: "Dela Gothic One", fontSize: '20px', marginTop: '3px'}}>Молодежные форум</h1>
+                  <h1 style={{fontFamily: "Dela Gothic One", fontSize: '20px'}}>IT-технологий</h1>
+                </div>
+
+                <div style={{border: '3px solid #2C4A52', height: '70px', display: 'flex', flexDirection: 'column', borderRadius: '30px', paddingLeft: '10px', paddingRight: '10px'}}>
+                  <h1 style={{fontFamily: "Dela Gothic One", fontSize: '20px', marginTop: '7px', marginBottom: '0px'}}>ИТ Колледж</h1>
+                  <h1 style={{fontFamily: "Dela Gothic One", fontSize: '20px'}}>Курган</h1>
+                </div>
+              </div>
+
+              <div style={{width: '98%', height: '300px', border: '3px solid #2C4A52', borderRadius: '20px', display: 'flex', flexDirection: 'column'}}>
+                <div style={{heigth: '100px', display: 'flex', height: '50%'}}>
+                  <div style={{margin: 'auto'}}> 
+                    <h1 style={{fontFamily: "Dela Gothic One"}}>10+ экспертов</h1>
+                  </div>
+                  <div style={{borderLeft: '3px solid #2C4A52'}}>
+
+                  </div>
+                  <div style={{margin: 'auto'}}>
+                    <h1 style={{fontFamily: "Dela Gothic One"}}>5+ спикеров</h1>
+                  </div>
+                </div>
+
+                <div style={{borderTop: '3px solid #2C4A52', width: '100%', margin: '0px'}}></div>
+
+                <div style={{height: '50%', margin: 'auto'}}>
+                    <h2 style={{marginTop: '50px', fontFamily: "Dela Gothic One"}}>Обсуждение актуальных тем</h2>
+                </div>
+              </div>
+
+              </div>
+
+            </div>
+
+            <div className="Chel" style={{width: '50%'}}>
+              <img src='chel.jpg'></img>
+              <div class="Chel">
+                  <img src='logo_new 1.png' style={{height:'224px', width:'229px'}}></img>
+                  <div style={{height:''}}>
+                    <span id="FontIcon" style={{ display: "block" }}>Форум</span>
+                    <span style={{ display: "block" }}>IT-технологий</span>
+                  </div>
+              </div>
+            </div>
           </div>
-        </div>
+          
       <div ref={formRef} className='globalcont'>
       <div className='containerLeft'>
-        sad
-        {/* { 
+        { 
           registrationStatus === 0 ?
           (
             <p>Погрузитесь в мир IT!</p>
@@ -145,21 +185,21 @@ function App() {
           (
             <p>Что-то пошло не так {'>'}:{'('}</p>
           )
-        } */}
+        } 
         <img src='wait_you.png' style={{width: '470px', height:'314px', display:'flex'}} class = 'img1'></img>
         <img src='group.png' style={{width:'175px', height:'256px'}} class='img2'></img>
       </div>
       <div className="containerRight">
-      {/* { registrationStatus === 0 ? 
+      { registrationStatus === 0 ? 
         (
           <div className="row">
-          <label htmlFor="exampleFormControlInput1" className="form-label">Заполните форму</label>
+            <label htmlFor="exampleFormControlInput1" className="form-label">Заполните форму</label>
           </div>
         ) 
       : registrationStatus === 1 ? 
         (
           <div className="row">
-          <label htmlFor="exampleFormControlInput1" className="form-label">Спасибо за регистрацию</label>
+            <label htmlFor="exampleFormControlInput1" className="form-label">Спасибо за регистрацию</label>
           </div>
         )
       :
@@ -168,9 +208,9 @@ function App() {
             <label htmlFor="exampleFormControlInput1" className="form-label">Регистрация не прошла</label>
           </div>
         )
-      } */}
+      }
       { 
-      registrationStatus === 0 ? (
+      registrationStatus === 1 ? (
             <><img src="http://www.w3.org/2000/svg" alt="Спасибо за регистрацию" /><i className="bi bi-check-circle"></i><div></div></>
           ) : (
             <><div className="mb-1 mt-3">
