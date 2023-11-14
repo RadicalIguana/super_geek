@@ -16,18 +16,17 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    username = Column(String(300), unique=True)
+    first_name = Column(String(300))
+    second_name = Column(String(300))
+    third_name = Column(String(300))
     email = Column(String(300), unique=True)
-    password = Column(String)
+    phone = Column(String(300), unique=True)
+    # password = Column(String(300))
 
-    @classmethod
-    def get_by_username(cls, username: str):
-        session = SessionLocal()
-        instance = session.query(cls).filter_by(username=username).first()
-        session.close()
-        return instance
-    
-    @classmethod
-    def create_user(cls, username: str, email: str, password: str):
-        session = SessionLocal()
+    # @classmethod
+    # def get_by_username(cls, username: str):
+    #     session = SessionLocal()
+    #     instance = session.query(cls).filter_by(username=username).first()
+    #     session.close()
+    #     return instance
         
