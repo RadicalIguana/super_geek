@@ -90,12 +90,12 @@ async def read_users():
 async def create_user(user: UserInput):
     db = DBSession()
     # try:
-    if len(user.username) == 0 or len(user.password) == 0 or len(user.email) == 0:
-        raise HTTPException(status_code=400, 
-                detail={
-                    "status": "Error 400",
-                    'msg': 'Some field is empty'
-                })
+    # if len(user.username) == 0 or len(user.password) == 0 or len(user.email) == 0:
+    #     raise HTTPException(status_code=400, 
+    #             detail={
+    #                 "status": "Error 400",
+    #                 'msg': 'Some field is empty'
+    #             })
         
         
     new_user = models.User(
