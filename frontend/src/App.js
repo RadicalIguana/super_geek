@@ -131,7 +131,7 @@ function App() {
         </div>
       <div ref={formRef} className='globalcont'>
       <div className='containerLeft'>
-        sad
+        
         {/* { 
           registrationStatus === 0 ?
           (
@@ -146,8 +146,7 @@ function App() {
             <p>Что-то пошло не так {'>'}:{'('}</p>
           )
         } */}
-        <img src='wait_you.png' style={{width: '470px', height:'314px', display:'flex'}} class = 'img1'></img>
-        <img src='group.png' style={{width:'175px', height:'256px'}} class='img2'></img>
+        <img src='wait_you.png' style={{width: '470px', height:'414px', display:'flex'}} class = 'img1'></img>
       </div>
       <div className="containerRight">
       {/* { registrationStatus === 0 ? 
@@ -170,7 +169,7 @@ function App() {
         )
       } */}
       { 
-      registrationStatus === 0 ? (
+      registrationStatus === 1 ? (
             <><img src="http://www.w3.org/2000/svg" alt="Спасибо за регистрацию" /><i className="bi bi-check-circle"></i><div></div></>
           ) : (
             <><div className="mb-1 mt-3">
