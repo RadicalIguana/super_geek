@@ -7,13 +7,12 @@ from model.database import DBSession
 from model import models
 from model.schemas import UserInput, Token, TokenData
 
-#Auth
 from typing import Annotated
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
-SECRET_KEY = "change_on_prod_or_we_will_be_hacked"
+SECRET_KEY = "change_on_prod_or_we_will_be_hacked_by_13yo_russian_hackers"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -26,11 +25,11 @@ def verify_password(plain_password, hashed_password):
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-def get_user(username: str):
-    return models.User.get_by_username(username=username)
+def get_user(email: str):
+    return models.User.get_by_email(email=email)
 
-def authenticate_user(username: str, password: str):
-    user = get_user(username)
+def authenticate_user(email: str, password: str):
+    user = get_user(email)
     if not user:
         return False
     if not verify_password(password, user.password):
@@ -55,13 +54,13 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
+        email: str = payload.get("sub")
+        if email is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
+        token_data = TokenData(email=email)
     except JWTError:
         raise credentials_exception
-    user = get_user(username=token_data.username)
+    user = get_user(username=token_data.email)
     if user is None:
         raise credentials_exception
     return user
